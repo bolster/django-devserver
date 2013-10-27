@@ -1,7 +1,7 @@
 from django.conf import settings
 from django.core.management.commands.runserver import Command as BaseCommand
 from django.core.management.base import CommandError, handle_default_options
-from django.core.servers.basehttp import WSGIServerException, WSGIServer
+from django.core.servers.basehttp import WSGIServer
 from django.core.handlers.wsgi import WSGIHandler
 
 import os
@@ -189,7 +189,7 @@ class Command(BaseCommand):
             else:
                 run(self.addr, int(self.port), app, mixin, ipv6=options['use_ipv6'])
 
-        except WSGIServerException, e:
+        except Exception, e:
             # Use helpful error messages instead of ugly tracebacks.
             ERRORS = {
                 13: "You don't have permission to access that port.",
